@@ -9,9 +9,9 @@ enum payment_type {
 
 // general order model
 export interface Order {
-  id: number;
-  date: Date;
-  userId: string;
-  products: ProductInsideOrder[];
-  paymentType: payment_type;
+  OrderId: number;
+  OrderDate: Date;
+  UserId: string;
+  Products: ProductInsideOrder[];
+  PaymentType: payment_type;
 }
