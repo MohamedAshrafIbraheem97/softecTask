@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DatabaseService } from './services/database.service';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +10,9 @@ import { DatabaseService } from './services/database.service';
 export class AppComponent implements OnInit {
   title = 'softecTask';
 
-  constructor(private database: DatabaseService) {}
+  constructor(private _productService: ProductService) {}
 
   ngOnInit(): void {
-    this.database.getUsers().subscribe((data) => console.log(data));
+    this._productService.getProduct(123);
   }
 }
