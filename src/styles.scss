@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+
+// colors
+$primaryColor: #2c3333;
+$secondaryColor: #2e4f4f;
+$primaryTextColor: #0e8388;
+$backgroundColor: #cbe4de;
+
+//  break points
+$mdScreen: "768px";
+$lgScreen: "992px";
+
+// general styling
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}

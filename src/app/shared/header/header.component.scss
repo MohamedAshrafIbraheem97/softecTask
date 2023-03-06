@@ -1,0 +1,40 @@
+@import "../../../styles.scss";
+nav {
+  display: flex;
+  background-color: $backgroundColor;
+  justify-content: space-evenly;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 50%;
+    list-style-type: none;
+
+    li {
+      a {
+        text-decoration: none;
+        color: $primaryTextColor;
+        display: inline-block;
+        padding: 2rem 3rem;
+        font: {
+          size: 1.2em;
+        }
+      }
+    }
+  }
+}
+
+.active {
+  font-weight: 900;
+}
+
+@media only screen and (min-width: $mdScreen) {
+  nav {
+    ul {
+      flex-direction: row;
+    }
+  }
+}
