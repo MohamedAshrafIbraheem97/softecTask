@@ -1,1 +1,78 @@
-<p>new-order works!</p>
+<section class="container">
+  <div class="row" *ngIf="order.length > 0; else noProductsTemplate">
+    <div class="col-8">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Qty</th>
+            <th scope="col">Img</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- iterate over the products -->
+          <tr *ngFor="let productInOrder of order">
+            <td>{{ productInOrder.product.ProductName }}</td>
+            <td>{{ productInOrder.product.ProductPrice }}$</td>
+            <td>{{ productInOrder.Pieces }}</td>
+            <td>
+              <img
+                class="w-100"
+                [src]="productInOrder.product.ProductImg"
+                [alt]="productInOrder.product.ProductName"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-4">
+      <form #newOrderForm="ngForm" (ngSubmit)="onSubmit(newOrderForm)">
+        <label for="customer" class="form-label">Customer</label>
+        <select
+          class="form-select"
+          aria-label="single select"
+          id="customer"
+          name="customer"
+          ngModel
+          required
+        >
+          <!-- <option selected>Select a user</option> -->
+          <option [value]="user.Id" *ngFor="let user of users">
+            {{ user.Name }}
+          </option>
+        </select>
+
+        <label for="paymentMethod" class="form-label">payment Method</label>
+        <select
+          class="form-select"
+          aria-label="single select"
+          id="paymentMethod"
+          name="paymentMethod"
+          ngModel
+          required
+        >
+          <option [value]="paymentMethods.online">
+            {{ paymentMethods.online }}
+          </option>
+          <option [value]="paymentMethods.cash">
+            {{ paymentMethods.cash }}
+          </option>
+        </select>
+
+        <button
+          type="submit"
+          class="btn btn-success mt-2"
+          [disabled]="!newOrderForm.valid"
+        >
+          Save
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <ng-template #noProductsTemplate>
+    <p>Please select products in order to proceed!</p>
+  </ng-template>
+</section>

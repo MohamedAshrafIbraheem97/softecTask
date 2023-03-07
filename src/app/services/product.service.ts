@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Product } from '../models/product.model';
+import { newOrder, Product } from '../models/product.model';
 import { DatabaseService } from './database.service';
 
 @Injectable({
@@ -8,6 +8,7 @@ import { DatabaseService } from './database.service';
 })
 export class ProductService {
   productsChanged = new BehaviorSubject<Product[]>(null!);
+  productsAddedToNewOrder = new BehaviorSubject<newOrder[]>(null!);
 
   constructor(private _databaseService: DatabaseService) {
     this.getProducts();
@@ -36,6 +37,21 @@ export class ProductService {
         // check if there is a product to be updated or not if there's more than one then edit the first one only
         if (productToBeUpdated.length > 0) {
           productToBeUpdated[0].AvailablePieces = newQuantity;
+        }
+      }
+    });
+  }
+
+  reduceProductQtyByOne(id: number) {
+    this.productsChanged.subscribe((_products) => {
+      if (_products) {
+        let productToBeUpdated = _products.filter(
+          (product) => product.ProductId === id
+        );
+
+        // check if there is a product to be updated or not if there's more than one then edit the first one only
+        if (productToBeUpdated.length > 0) {
+          productToBeUpdated[0].AvailablePieces -= 1;
         }
       }
     });

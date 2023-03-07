@@ -2,7 +2,7 @@
 import { ProductInsideOrder } from './product.model';
 
 // change here to add more than payment type
-enum payment_type {
+export enum payment_type {
   online = 'online',
   cash = 'Cash',
 }

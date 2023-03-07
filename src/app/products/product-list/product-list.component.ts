@@ -1,7 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Product } from 'src/app/models/product.model';
+import { Order } from 'src/app/models/order.model';
+import { newOrder, Product } from 'src/app/models/product.model';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -12,6 +13,8 @@ import { ProductService } from 'src/app/services/product.service';
 export class ProductListComponent implements OnInit, OnDestroy {
   productsSubscription$!: Subscription;
   products!: Product[];
+  isAddingNewOrder: boolean = false;
+  newOrder: newOrder[] = [];
 
   constructor(
     private readonly _productService: ProductService,
@@ -36,5 +39,23 @@ export class ProductListComponent implements OnInit, OnDestroy {
     this._router.navigate(['edit/', id], {
       relativeTo: this._currentRoute,
     });
+  }
+
+  onNewOrder() {
+    this.isAddingNewOrder = !this.isAddingNewOrder;
+    console.log('clicked');
+  }
+
+  onAddToOrder(product: Product) {
+    this.newOrder.push({
+      product: product,
+      Pieces: 1,
+    });
+    this._productService.reduceProductQtyByOne(product.ProductId);
+  }
+
+  onSaveOrder() {
+    this._productService.productsAddedToNewOrder.next(this.newOrder);
+    this._router.navigate(['orders/new']);
   }
 }

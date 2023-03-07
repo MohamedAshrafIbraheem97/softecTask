@@ -12,3 +12,8 @@ export interface ProductInsideOrder {
   ProductId: number;
   Quantity: number;
 }
+
+export interface newOrder {
+  product: Product;
+  Pieces: number;
+}
