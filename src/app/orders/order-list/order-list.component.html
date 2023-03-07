@@ -12,7 +12,11 @@
       <td>{{ order.OrderDate | date : "mediumDate" }}</td>
       <td>{{ order.totalPrice }}$</td>
       <td>{{ order.PaymentType }}</td>
-      <td><a href="#" class="link-warning">details</a></td>
+      <td>
+        <a [routerLink]="['/orders', order.OrderId]" class="link-warning"
+          >details</a
+        >
+      </td>
     </tr>
   </tbody>
 </table>

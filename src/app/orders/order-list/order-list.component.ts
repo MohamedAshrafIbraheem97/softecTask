@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Order } from 'src/app/models/order.model';
 import { OrderService } from 'src/app/services/order.service';
 
@@ -7,18 +8,27 @@ import { OrderService } from 'src/app/services/order.service';
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss'],
 })
-export class OrderListComponent implements OnInit {
+export class OrderListComponent implements OnInit, OnDestroy {
   orders!: Order[];
+  subscription!: Subscription;
 
   constructor(private _orderService: OrderService) {}
 
   ngOnInit(): void {
-    this._orderService.ordersChanged.subscribe((_orders) => {
-      if (_orders) {
-        this.orders = this.convertOrderDatesToValidDates(_orders);
-        this.orders = this.calculateOrderPrice(_orders);
+    this.subscription = this._orderService.ordersChanged.subscribe(
+      (_orders) => {
+        if (_orders) {
+          this.orders = this.convertOrderDatesToValidDates(_orders);
+          this.orders = this.calculateOrderPrice(_orders);
+        }
       }
-    });
+    );
+    this._orderService.ordersChanged.next(this.orders);
+  }
+
+  ngOnDestroy(): void {
+    // unsubscripe from any subscription
+    this.subscription.unsubscribe();
   }
 
   // convert non valid dates inside order to valid one and return all orders
@@ -42,11 +52,14 @@ export class OrderListComponent implements OnInit {
     return modifedOrders;
   }
 
+  //calculate order total price and return all orders
   private calculateOrderPrice(orders: Order[]) {
     let modifedOrders: Order[] = [];
 
     orders.forEach((order) => {
-      order.totalPrice = this._orderService.calculateTotalOrderPrice(order);
+      order.totalPrice = +this._orderService
+        .calculateTotalOrderPrice(order)
+        .toFixed(2);
 
       modifedOrders.push(order);
     });
