@@ -9,22 +9,23 @@ import { DatabaseService } from './database.service';
 export class ProductService {
   productsChanged = new BehaviorSubject<Product[]>(null!);
 
-  constructor(private _databaseService: DatabaseService) {}
+  constructor(private _databaseService: DatabaseService) {
+    this.getProducts();
+  }
 
+  // to fetch all products (mainly used to populate data within the products behavior subject)
   getProducts() {
     this._databaseService.getProducts().subscribe({
       next: (products) => {
         this.productsChanged.next(products);
       },
-      error: () => {
-        throw new Error('an Error happened when getting products');
-      },
-      complete: () => {
-        return this.productsChanged.value;
+      error: (e) => {
+        throw new Error('an Error happened while getting products' + e);
       },
     });
   }
 
+  // to get one product
   getProduct(id: number) {
     // need to get data from http to create interceptor first before starting here
     //
