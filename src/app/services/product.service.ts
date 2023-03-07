@@ -25,19 +25,19 @@ export class ProductService {
     });
   }
 
-  // to get one product
-  getProduct(id: number) {
-    // need to get data from http to create interceptor first before starting here
-    //
-    //
-    // this.productsChanged.subscribe((products) => {
-    //   console.log(products);
-    //   products.map((_product) => {
-    //     if (_product.ProductId === id) {
-    //       return _product;
-    //     }
-    //     throw new Error('Product not found');
-    //   });
-    // });
+  // to edit one product
+  editProduct(id: number, newQuantity: number) {
+    this.productsChanged.subscribe((_products) => {
+      if (_products) {
+        let productToBeUpdated = _products.filter(
+          (product) => product.ProductId === id
+        );
+
+        // check if there is a product to be updated or not if there's more than one then edit the first one only
+        if (productToBeUpdated.length > 0) {
+          productToBeUpdated[0].AvailablePieces = newQuantity;
+        }
+      }
+    });
   }
 }
