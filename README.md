@@ -47,12 +47,14 @@ c. didn't know how to use interceptor as i only have getAll requests -> but I tr
 
 ## follow the below steps to run the project
 
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
+Run `npm install` to install the required dependencies
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Run `ng serve --o` for a dev server to start and the browser will be opened when the App finished loading. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
