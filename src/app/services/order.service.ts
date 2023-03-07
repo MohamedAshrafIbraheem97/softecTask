@@ -18,6 +18,7 @@ export class OrderService {
     this.getOrders();
   }
 
+  // get all orders
   getOrders() {
     this._databaseService.getOrders().subscribe({
       next: (orders) => {
@@ -29,6 +30,7 @@ export class OrderService {
     });
   }
 
+  // convert invalid dates to valid one
   makeDateValid(dateToBeValidated: Date) {
     let strDate = dateToBeValidated.toString();
     let char = ' ';
@@ -58,7 +60,7 @@ export class OrderService {
 
         // if the product is found then add its price
         if (fetchedProduct) {
-          totalPrice += fetchedProduct.ProductPrice;
+          totalPrice += product.Quantity * fetchedProduct.ProductPrice;
         }
       });
     });

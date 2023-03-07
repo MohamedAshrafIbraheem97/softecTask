@@ -1,1 +1,74 @@
-<p>order-detail works!</p>
+<div class="row">
+  <div class="col-12 col-md-6 py-1">
+    <div class="row" *ngIf="orderDetails">
+      <!-- order details -->
+      <div class="col-12">
+        <h3 class="text-primary">Order data</h3>
+        <p>
+          <span class="fw-bold">Order date:</span>
+          {{ orderDetails.OrderDate | date }}
+        </p>
+        <p>
+          <span class="fw-bold">Payment Type:</span>
+          {{ orderDetails.PaymentType }}
+        </p>
+        <p>
+          <span class="fw-bold">total Price:</span>
+          {{ orderDetails.totalPrice }}$
+        </p>
+      </div>
+      <!-- user details -->
+      <div class="col-12" *ngIf="userDetails">
+        <h3 class="text-primary">user data</h3>
+        <div class="row">
+          <div class="col-12">
+            <p><span class="fw-bold">Name:</span> {{ userDetails.Name }}</p>
+            <p><span class="fw-bold">Email:</span> {{ userDetails.Email }}</p>
+            <p><span class="fw-bold">Phone:</span> {{ userDetails.Phone }}</p>
+            <p>
+              <span class="fw-bold">Address:</span> {{ userDetails.Address }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-6 py-1">
+    <div class="row">
+      <!-- products details -->
+      <div class="col-12" *ngIf="productsDetails.length > 0">
+        <h3 class="text-primary">products in the order</h3>
+        <div class="mt-3" *ngFor="let product of productsDetails">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <p>
+                <span class="fw-bold">Product Name:</span>
+                {{ product.ProductName }}
+              </p>
+              <p>
+                <span class="fw-bold">Product Price:</span>
+                {{ product.ProductPrice }}$
+              </p>
+              <p *ngFor="let singleProduct of orderDetails.Products">
+                <span *ngIf="singleProduct.ProductId === product.ProductId">
+                  <span class="fw-bold">requested Qty:</span>
+                  {{ singleProduct.Quantity }}
+                </span>
+              </p>
+            </div>
+            <div class="col-4">
+              <p>
+                <img
+                  [src]="product.ProductImg"
+                  alt=""
+                  class="w-100 rounded-2"
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
