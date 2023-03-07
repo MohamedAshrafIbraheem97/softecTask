@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Order } from '../models/order.model';
-import { Product } from '../models/product.model';
+
+// models
+import { Order, payment_type } from '../models/order.model';
+import { Product, ProductInsideOrder } from '../models/product.model';
+
+// services
 import { DatabaseService } from './database.service';
 import { ProductService } from './product.service';
 
@@ -9,12 +13,13 @@ import { ProductService } from './product.service';
   providedIn: 'root',
 })
 export class OrderService {
-  ordersChanged = new BehaviorSubject<Order[]>(null!);
+  orders = new BehaviorSubject<Order[]>(null!);
 
   constructor(
     private _databaseService: DatabaseService,
     private _productService: ProductService
   ) {
+    // populate the orders behvaior subject
     this.getOrders();
   }
 
@@ -22,7 +27,7 @@ export class OrderService {
   getOrders() {
     this._databaseService.getOrders().subscribe({
       next: (orders) => {
-        this.ordersChanged.next(orders);
+        this.orders.next(orders);
       },
       error: (e) => {
         throw new Error('an Error happened while getting orders' + e);
@@ -66,5 +71,28 @@ export class OrderService {
     });
 
     return totalPrice;
+  }
+
+  // create a new order
+  newOrder(
+    items: ProductInsideOrder[],
+    userId: string,
+    paymentMethod: payment_type
+  ) {
+    let newOrder: Order = {
+      OrderId: this.genrateId(),
+      OrderDate: new Date(),
+      UserId: userId,
+      Products: items,
+      PaymentType: paymentMethod,
+    };
+
+    // get the orders list and push the new order to it
+    this.orders.next(this.orders.getValue().concat([newOrder]));
+  }
+
+  // genrate id
+  private genrateId(): number {
+    return Date.now();
   }
 }

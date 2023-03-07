@@ -1,4 +1,11 @@
 <section class="container">
+  <div class="row my-3">
+    <div class="col-12 d-flex justify-content-end">
+      <button class="btn btn-danger" (click)="onNewOrder()">
+        {{ isAddingNewOrder ? "Cancel" : "Create new order" }}
+      </button>
+    </div>
+  </div>
   <h3>Products</h3>
 
   <!-- show products if we have otherwise show the template at the end -->
@@ -10,7 +17,8 @@
           <th>Price</th>
           <th>Qty</th>
           <th>Img</th>
-          <th>edit?</th>
+          <th [ngClass]="isAddingNewOrder ? 'd-none' : ''">edit?</th>
+          <th [ngClass]="isAddingNewOrder ? '' : 'd-none'">Wanted Qty</th>
         </tr>
       </thead>
       <tbody>
@@ -26,7 +34,7 @@
           <td>
             <img [src]="product.ProductImg" [alt]="product.ProductName" />
           </td>
-          <td>
+          <td [ngClass]="isAddingNewOrder ? 'd-none' : ''">
             <button
               class="btn btn-warning"
               (click)="editProduct(product.ProductId)"
@@ -34,9 +42,35 @@
               edit
             </button>
           </td>
+          <td [ngClass]="isAddingNewOrder ? '' : 'd-none'">
+            <button
+              class="btn btn-info"
+              [disabled]="product.AvailablePieces < 1"
+              (click)="onAddToOrder(product)"
+            >
+              Add to order
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+  <div class="position-fixed bottom-0 end-0 my-5 mx-2" *ngIf="isAddingNewOrder">
+    <button
+      type="button"
+      class="btn btn-primary position-relative"
+      [disabled]="newOrder.length < 1"
+      (click)="onSaveOrder()"
+    >
+      Save Order
+      <span
+        [ngClass]="newOrder.length > 0 ? '' : 'd-none'"
+        class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"
+      >
+        <span class="visually-hidden">New alerts</span>
+      </span>
+    </button>
   </div>
 
   <!-- template will be shown when there's no products -->

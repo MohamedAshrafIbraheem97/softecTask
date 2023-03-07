@@ -47,7 +47,7 @@ export class OrderDetailComponent implements OnInit, OnDestroy {
   initOrderDetails(orderId: number) {
     // get order details
     this.subscriptions.push(
-      this._orderService.ordersChanged.subscribe((_orders) => {
+      this._orderService.orders.subscribe((_orders) => {
         if (_orders) {
           this.orderDetails = _orders.find(
             (_order) => _order.OrderId === orderId

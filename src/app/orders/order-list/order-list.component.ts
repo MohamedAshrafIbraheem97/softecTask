@@ -15,15 +15,13 @@ export class OrderListComponent implements OnInit, OnDestroy {
   constructor(private _orderService: OrderService) {}
 
   ngOnInit(): void {
-    this.subscription = this._orderService.ordersChanged.subscribe(
-      (_orders) => {
-        if (_orders) {
-          this.orders = this.convertOrderDatesToValidDates(_orders);
-          this.orders = this.calculateOrderPrice(_orders);
-        }
+    this.subscription = this._orderService.orders.subscribe((_orders) => {
+      if (_orders) {
+        this.orders = this.convertOrderDatesToValidDates(_orders);
+        this.orders = this.calculateOrderPrice(_orders);
       }
-    );
-    this._orderService.ordersChanged.next(this.orders);
+    });
+    this._orderService.orders.next(this.orders);
   }
 
   ngOnDestroy(): void {
