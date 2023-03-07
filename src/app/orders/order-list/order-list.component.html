@@ -1,0 +1,22 @@
+<table class="table" *ngIf="orders; else noOrdersTemplate">
+  <thead>
+    <tr>
+      <th scope="col">Order date</th>
+      <th scope="col">Total price</th>
+      <th scope="col">Payment method</th>
+      <th scope="col">details</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let order of orders">
+      <td>{{ order.OrderDate | date : "mediumDate" }}</td>
+      <td>{{ order.totalPrice }}$</td>
+      <td>{{ order.PaymentType }}</td>
+      <td><a href="#" class="link-warning">details</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #noOrdersTemplate>
+  <h3>No orders yet!</h3>
+</ng-template>

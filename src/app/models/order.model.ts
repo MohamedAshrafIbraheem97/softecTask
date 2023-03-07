@@ -14,4 +14,5 @@ export interface Order {
   UserId: string;
   Products: ProductInsideOrder[];
   PaymentType: payment_type;
+  totalPrice?: number;
 }
