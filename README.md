@@ -3,6 +3,7 @@
 ## About
 you can look at this project from two point of views
 1. admin view 
+
 a. list products
 
 b. edit products
@@ -12,6 +13,7 @@ c. list orders
 d. create new orders
 
 2. user view 
+
 a. list products
 
 c. list his own orders
