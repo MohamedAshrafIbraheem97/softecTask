@@ -18,7 +18,7 @@ c. list his own orders
 
 d. create new orders
 
-**so I followed the first approach as it was more realistic when compared to the recieved requirements **
+**so I followed the first approach as it was more realistic when compared to the recieved requirements**
 
 ## Architecturing steps
 
@@ -43,7 +43,7 @@ c. didn't know how to use interceptor as i only have getAll requests -> but I tr
 8. I found out that i over engineer on some situations which lead to a time waste -> so i started to warn myself.
 
 
-** follow the below steps to run the project **
+## follow the below steps to run the project
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
 
