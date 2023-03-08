@@ -42,6 +42,8 @@ export class ProductService {
     });
   }
 
+  // reduce the Qty of an item added to the order
+  // so that users will not be able to request items which we don't have them on the stock
   reduceProductQtyByOne(id: number) {
     this.productsChanged.subscribe((_products) => {
       if (_products) {

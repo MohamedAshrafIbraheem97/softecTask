@@ -10,9 +10,7 @@ import { ProductService } from './services/product.service';
 export class AppComponent implements OnInit {
   title = 'softecTask';
 
-  constructor(private _productService: ProductService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    console.log(this._productService.editProduct(123, 5));
-  }
+  ngOnInit(): void {}
 }

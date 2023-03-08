@@ -16,7 +16,7 @@ const routes: Routes = [
         (_loadedModule) => _loadedModule.OrdersModule
       ),
   },
-  { path: '', redirectTo: 'orders', pathMatch: 'full' },
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
 ];
 
 @NgModule({
