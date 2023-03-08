@@ -1,12 +1,8 @@
-// modules created by angular
+// modules
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
-
-// modules created by developer
-import { ProductsModule } from './products/products.module';
-import { OrdersModule } from './orders/orders.module';
 
 // componenets
 import { AppComponent } from './app.component';
@@ -15,13 +11,7 @@ import { ProductsInterceptorService } from './services/products.interceptor.serv
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    ProductsModule,
-    OrdersModule,
-    HttpClientModule,
-  ],
+  imports: [BrowserModule, AppRoutingModule, HttpClientModule],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
