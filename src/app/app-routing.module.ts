@@ -9,14 +9,20 @@ import { ProductListComponent } from './products/product-list/product-list.compo
 import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  // {
+  //   path: 'products',
+  //   component: ProductsComponent,
+  //   children: [
+  //     { path: '', component: ProductListComponent },
+  //     { path: 'edit/:id', component: EditProductComponent },
+  //   ],
+  // },
   {
     path: 'products',
-    component: ProductsComponent,
-    children: [
-      { path: '', component: ProductListComponent },
-      { path: 'edit/:id', component: EditProductComponent },
-    ],
+    loadChildren: () =>
+      import('./products/products.module').then(
+        (_loadedModule) => _loadedModule.ProductsModule
+      ),
   },
   {
     path: 'orders',
@@ -27,6 +33,7 @@ const routes: Routes = [
       { path: ':id', component: OrderDetailComponent },
     ],
   },
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
 ];
 
 @NgModule({
