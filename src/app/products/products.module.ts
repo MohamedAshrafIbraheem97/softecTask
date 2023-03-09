@@ -6,9 +6,9 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { RouterModule } from '@angular/router';
 
 // components
-import { EditProductComponent } from './edit-product/edit-product.component';
-import { ProductsComponent } from './products.component';
-import { ProductListComponent } from './product-list/product-list.component';
+import { ProductsComponent } from './products/products.component';
+import { EditProductComponent } from './products/edit-product/edit-product.component';
+import { ProductListComponent } from './products/product-list/product-list.component';
 
 @NgModule({
   declarations: [ProductsComponent, EditProductComponent, ProductListComponent],

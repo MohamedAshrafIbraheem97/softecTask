@@ -3,10 +3,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 // componenets
-import { OrdersComponent } from './orders.component';
-import { NewOrderComponent } from './new-order/new-order.component';
-import { OrderDetailComponent } from './order-detail/order-detail.component';
-import { OrderListComponent } from './order-list/order-list.component';
+import { NewOrderComponent } from './orders/new-order/new-order.component';
+import { OrderDetailComponent } from './orders/order-detail/order-detail.component';
+import { OrderListComponent } from './orders/order-list/order-list.component';
+import { OrdersComponent } from './orders/orders.component';
 
 const routes: Routes = [
   {
